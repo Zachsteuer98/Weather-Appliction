@@ -1,14 +1,15 @@
 var userFormEl = document.querySelector("#user-form");
 var cityInputEl = document.querySelector("#citySearch")
+var citySearchName = document.querySelector("#city-search-name")
 
-var getCurrentWeatherData = function(cityName) {
+var getCurrentWeatherData = function(name) {
     //format the github apiUrl to grab weather for a specific city
-    var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=642eea345e5cbf72aef7bc5c87e8b7e2" 
+    var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + name + "&appid=642eea345e5cbf72aef7bc5c87e8b7e2" 
 
     //make a request to the url
     fetch(apiUrl).then(function(response) {
     response.json().then(function(data) {
-    console.log(data);
+    DisplayCity(data, name)
 });
 });
 };
@@ -16,10 +17,10 @@ var getCurrentWeatherData = function(cityName) {
 var formSubmitHandler = function(event) {
     event.preventDefault();
     //Get Value from input element
-    var cityName = cityInputEl.value.trim();
+    var name = cityInputEl.value.trim();
 
-    if (cityName) {
-        getCurrentWeatherData(cityName);
+    if (name) {
+        getCurrentWeatherData(name);
         cityInputEl.value = "";
     }
     else {
@@ -27,5 +28,10 @@ var formSubmitHandler = function(event) {
     }
     // console.log(event);
 };
+
+var DisplayCity = function(name) {
+    citySearchName.textContent = name
+    console.log(name);
+}
 
 userFormEl.addEventListener("submit", formSubmitHandler);

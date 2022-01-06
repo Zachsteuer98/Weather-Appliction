@@ -21,6 +21,14 @@
     flex: 0 0 calc(100% * 4 / 12 - 2%);
   }
 
+  .col-md-8 {
+    flex: 0 0 calc(100% * 8 / 12 - 2%);
+    margin: 21px;
+    border: 3px solid black;
+    height: 375px;
+    width: fit-content;
+  }
+
   .btn {
     font-size: 1.3rem;
     text-decoration:none;
@@ -52,4 +60,18 @@
   /* FONT UTILS */
 .text-uppercase {
     text-transform: uppercase;
+  }
+
+  /* FLEX CONTENT */
+.flex-row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .justify-space-between {
+    justify-content: space-between;
+  }
+  
+  #current-weather-for {
+      margin-top: 19px
   }
