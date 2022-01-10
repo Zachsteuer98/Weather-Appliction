@@ -3,7 +3,9 @@ var cityInputEl = document.querySelector("#citySearch");
 var citySearchName = document.querySelector("#city-search-name");
 var listGroupEl= document.getElementById("currentDayContent");
 var cityIdCounter = 0;
-var submitButton = document.getElementById("btn")
+var submitButton = document.querySelector(".btn")
+
+const cityNames = []
 
 var getCurrentWeatherData = function(name) {
     //format the github apiUrl to grab weather for a specific city
@@ -26,23 +28,19 @@ var getCurrentWeatherData = function(name) {
     // console.log(cityNames)
     // localStorage.setItem('city', cityNames)
 });
-});
 
-const cityNames = []
-    // cityNames.id = cityIdCounter++
+// cityNames.id = cityIdCounter++
 
-// var input = name
-
-    function searchForm (event) {
-        event.preventDefault();
+   
         var inputSearch = name
         cityNames.push(inputSearch);
         console.log(cityNames);
-        localStorage.setItem('cities', cityNames)
-    }
+        localStorage.setItem('cities', cityNames)  
+   
 
-    userFormEl.addEventListener("click", searchForm);
+});
 };
+
 
 
 
