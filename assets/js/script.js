@@ -1,7 +1,9 @@
 var userFormEl = document.querySelector("#user-form");
-var cityInputEl = document.querySelector("#citySearch")
-var citySearchName = document.querySelector("#city-search-name")
-var listGroupEl= document.getElementById("currentDayContent")
+var cityInputEl = document.querySelector("#citySearch");
+var citySearchName = document.querySelector("#city-search-name");
+var listGroupEl= document.getElementById("currentDayContent");
+var cityIdCounter = 0;
+var submitButton = document.getElementById("btn")
 
 var getCurrentWeatherData = function(name) {
     //format the github apiUrl to grab weather for a specific city
@@ -15,16 +17,36 @@ var getCurrentWeatherData = function(name) {
     const {speed} = data.wind
     const  {icon} = data.weather[0]
     const {temp, humidity} = data.main
-    console.log(data)
-    console.log (temp)
-    console.log(humidity)
+    // console.log(data)
+    // console.log (temp)
+    // console.log(humidity)
     DisplayCity(name, temp, speed, humidity)
-    // var temp = wind
+    // var input = name
+    // cityNames.push(input)
+    // console.log(cityNames)
+    // localStorage.setItem('city', cityNames)
+});
+});
 
-    // console.log(DisplayCity(data.name))
-});
-});
+const cityNames = []
+    // cityNames.id = cityIdCounter++
+
+// var input = name
+
+    function searchForm (event) {
+        event.preventDefault();
+        var inputSearch = name
+        cityNames.push(inputSearch);
+        console.log(cityNames);
+        localStorage.setItem('cities', cityNames)
+    }
+
+    userFormEl.addEventListener("click", searchForm);
 };
+
+
+
+
 
 var formSubmitHandler = function(event) {
     event.preventDefault();
@@ -60,6 +82,8 @@ listGroupEl.appendChild(humidityOutside);
 // listGroupEl.appendChild(humidityOutside)
 }
 
-
 userFormEl.addEventListener("submit", formSubmitHandler);
+
+
+
 
