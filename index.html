@@ -29,17 +29,31 @@
 
 <main class="flex-row justify-space-between">
     <div class="col-12 col-md-4">
-    <div class="card">
-    <h3 class="card-header text-uppercase">Search for a City:</h3>
-    <form id="user-form" class="card-body">
-        <input name="citySearch" id="citySearch" type="text" autofocus="true" class="form-input" />
-        <br>
-        <button type="submit" class="btn">Search</button>
-    </form>
-</div>
-</div>
+        <div class="card">
+        <h3 class="card-header text-uppercase">Search for a City:</h3>
+        <form id="user-form" class="card-body">
+            <input name="citySearch" id="citySearch" type="text" autofocus="true" class="form-input" />
+            <button type="submit" class="btn">Search</button>
+        </form>
+        </div>
+
+        <!-- list of prior searched cities -->
+        <ul id="city-results" class="list-group mt-4"></ul>
+        <!-- clear storage button -->
+         
+    </div>
+
+    <div class= "col-12 col-md-8">
+        <h2 id = "current-weather-for"> Current Weather for: <span id="city-search-name"></span></h2>
+        <div id="repos-container" class="list-group">
+            <div>
+                <ul id= "currentDayContent"></ul>
+            </div>
+        </div>
+    </div>
 </main>
- 
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src= "assets/js/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </body>
