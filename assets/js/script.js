@@ -4,8 +4,9 @@ var citySearchName = document.querySelector("#city-search-name");
 var listGroupEl= document.getElementById("currentDayContent");
 var cityIdCounter = 0;
 var submitButton = document.querySelector(".btn")
+var recentSearch = document.querySelector("#city-results")
 
-const cityNames = []
+var cityNames = []
 
 var getCurrentWeatherData = function(name) {
     //format the github apiUrl to grab weather for a specific city
@@ -19,32 +20,28 @@ var getCurrentWeatherData = function(name) {
     const {speed} = data.wind
     const  {icon} = data.weather[0]
     const {temp, humidity} = data.main
-    // console.log(data)
-    // console.log (temp)
-    // console.log(humidity)
     DisplayCity(name, temp, speed, humidity)
-    // var input = name
-    // cityNames.push(input)
-    // console.log(cityNames)
-    // localStorage.setItem('city', cityNames)
+    
 });
-
 // cityNames.id = cityIdCounter++
 
-   
         var inputSearch = name
         cityNames.push(inputSearch);
         console.log(cityNames);
-        localStorage.setItem('cities', cityNames)  
-   
-
+        localStorage.setItem('cities', JSON.stringify(cityNames))  
 });
 };
 
+reload()
 
+function reload() {
+    cityNames = JSON.parse(localStorage.getItem("cities"))
+    console.log(cityNames)
 
-
-
+    for (var i = 0; i < cityNames.length; i++) {
+        addToList(cityNames[i])
+    }
+}
 
 var formSubmitHandler = function(event) {
     event.preventDefault();
@@ -53,6 +50,7 @@ var formSubmitHandler = function(event) {
 
     if (name) {
         getCurrentWeatherData(name);
+        addToList(name)
         cityInputEl.value = "";
     }
     else {
@@ -61,6 +59,11 @@ var formSubmitHandler = function(event) {
     // console.log(event);
 };
 
+function addToList(cityName) {
+    var buttonEl = document.createElement("button");
+    buttonEl.textContent = cityName;
+    recentSearch.appendChild(buttonEl);
+}
 
 var DisplayCity = function(name, temp, wind, humidity) {
     citySearchName.textContent = name
