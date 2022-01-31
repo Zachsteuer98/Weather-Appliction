@@ -15,14 +15,24 @@ var getCurrentWeatherData = function(name) {
     //make a request to the url
     fetch(apiUrl)
     .then(function(response) {
-    response.json().then(function(data) { 
+    response.json().then(function(data) {
+    const {lon, lat}= data.coord 
     const  {name} = data
     const {speed} = data.wind
     const  {icon} = data.weather[0]
     const {temp, humidity} = data.main
     listGroupEl.innerHTML = ''
     DisplayCity(name, temp, speed, humidity)
+
+    var fiveDayFetchCall = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=642eea345e5cbf72aef7bc5c87e8b7e2&units=imperial"
     
+    //make a request to the url
+    fetch(fiveDayFetchCall)
+    .then(function(response){
+        response.json().then(function(data){
+            console.log(data)
+        })
+    })
 });
 // cityNames.id = cityIdCounter++
 
