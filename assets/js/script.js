@@ -10,7 +10,7 @@ var cityNames = []
 
 var getCurrentWeatherData = function(name) {
     //format the github apiUrl to grab weather for a specific city
-    var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + name + "&appid=642eea345e5cbf72aef7bc5c87e8b7e2" 
+    var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + name + "&appid=642eea345e5cbf72aef7bc5c87e8b7e2&units=imperial" 
 
     //make a request to the url
     fetch(apiUrl)
@@ -20,6 +20,7 @@ var getCurrentWeatherData = function(name) {
     const {speed} = data.wind
     const  {icon} = data.weather[0]
     const {temp, humidity} = data.main
+    listGroupEl.innerHTML = ''
     DisplayCity(name, temp, speed, humidity)
     
 });
@@ -35,7 +36,7 @@ var getCurrentWeatherData = function(name) {
 reload()
 
 function reload() {
-    cityNames = JSON.parse(localStorage.getItem("cities"))
+    cityNames = JSON.parse(localStorage.getItem("cities")) || []
     console.log(cityNames)
 
     for (var i = 0; i < cityNames.length; i++) {
@@ -49,8 +50,11 @@ var formSubmitHandler = function(event) {
     var name = cityInputEl.value.trim();
 
     if (name) {
+        console.log('hello')
+        if (cityNames.indexOf(name) === -1) {
+         addToList(name)
+        }
         getCurrentWeatherData(name);
-        addToList(name)
         cityInputEl.value = "";
     }
     else {
@@ -62,6 +66,10 @@ var formSubmitHandler = function(event) {
 function addToList(cityName) {
     var buttonEl = document.createElement("button");
     buttonEl.textContent = cityName;
+    buttonEl.addEventListener('click', function() {
+        var name = this.textContent
+        getCurrentWeatherData(name)
+    })
     recentSearch.appendChild(buttonEl);
 }
 
@@ -77,10 +85,6 @@ listGroupEl.appendChild(windSpeed);
 var humidityOutside = document.createElement("li");
 humidityOutside.textContent = "Humidity:" + humidity + "%";
 listGroupEl.appendChild(humidityOutside);
-
-// listGroupEl.appendChild(temperature)
-// listGroupEl.appendChild(windSpeed)
-// listGroupEl.appendChild(humidityOutside)
 }
 
 userFormEl.addEventListener("submit", formSubmitHandler);
