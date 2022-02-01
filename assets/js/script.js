@@ -34,6 +34,8 @@ var getCurrentWeatherData = function(name) {
     listGroupEl.innerHTML = ''
     DisplayCity(name, temp, speed, humidity)
 
+
+    //fetch call for 5 day forecast wouldn't accept appid, so I used the daily 3 hour forecast instead.
     var fiveDayFetchCall = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=642eea345e5cbf72aef7bc5c87e8b7e2&units=imperial"
     
     //make a request to the url
@@ -78,13 +80,21 @@ var getCurrentWeatherData = function(name) {
     dayFiveForecast(dateFive, tempFive, windFive, humidityFive)
         })
     })
+
+    var uvIndex = "https://api.openweathermap.org/data/2.5/onecall?lat=" +lat + "&lon=" + lon + "&appid=642eea345e5cbf72aef7bc5c87e8b7e2"
+    fetch(uvIndex)
+    .then(function(response) {
+    return response.json() })
+    .then(function(data) {
+    console.log("UV Index", data)
+    })
 });
 // cityNames.id = cityIdCounter++
 
-        var inputSearch = name
-        cityNames.push(inputSearch);
-        console.log(cityNames);
-        localStorage.setItem('cities', JSON.stringify(cityNames))  
+        // var inputSearch = name
+        // cityNames.push(inputSearch);
+        // console.log(cityNames);
+        // localStorage.setItem('cities', JSON.stringify(cityNames))  
 });
 };
 
@@ -108,6 +118,9 @@ var formSubmitHandler = function(event) {
         console.log('hello')
         if (cityNames.indexOf(name) === -1) {
          addToList(name)
+        cityNames.push(name);
+        console.log(name);
+        localStorage.setItem('cities', JSON.stringify(cityNames))
         }
         getCurrentWeatherData(name);
         cityInputEl.value = "";
