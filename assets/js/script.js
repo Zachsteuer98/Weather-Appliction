@@ -87,14 +87,11 @@ var getCurrentWeatherData = function(name) {
     return response.json() })
     .then(function(data) {
     console.log("UV Index", data)
+    const { uvi } = data.daily[0]
+    console.log(uvi)
+    DisplayUV(uvi)
     })
-});
-// cityNames.id = cityIdCounter++
-
-        // var inputSearch = name
-        // cityNames.push(inputSearch);
-        // console.log(cityNames);
-        // localStorage.setItem('cities', JSON.stringify(cityNames))  
+});  
 });
 };
 
@@ -154,6 +151,22 @@ var humidityOutside = document.createElement("li");
 humidityOutside.textContent = "Humidity: " + humidity + " %";
 listGroupEl.appendChild(humidityOutside);
 }
+
+var DisplayUV= function(uvi) {
+var UV = document.createElement("li");
+UV.setAttribute('id', 'uvVal')
+UV.textContent = "UV Index: " + uvi;
+listGroupEl.appendChild(UV);
+
+    if (uvi>=0 && uvi<3){
+        UV.setAttribute("class", "uv-favorable");
+    } else if (uvi>=3 && uvi<8){
+        UV.setAttribute("class", "uv-moderate");
+    } else if (uvi>=8){
+        UV.setAttribute("class", "uv-severe");
+    }
+};
+
 
 var dayOneForecast = function(dateOne, tempOne, windOne, humidityOne) {
     dateDayOne.textContent = dateOne
