@@ -32,7 +32,7 @@ var getCurrentWeatherData = function(name) {
     const  {icon} = data.weather[0]
     const {temp, humidity} = data.main
     listGroupEl.innerHTML = ''
-    DisplayCity(name, temp, speed, humidity)
+    DisplayCity(name, temp, speed, humidity, icon)
 
 
     //fetch call for 5 day forecast wouldn't accept appid, so I used the daily 3 hour forecast instead.
@@ -138,8 +138,18 @@ function addToList(cityName) {
     recentSearch.appendChild(buttonEl);
 }
 
-var DisplayCity = function(name, temp, wind, humidity) {
-    citySearchName.textContent = name
+var DisplayCity = function(name, temp, wind, humidity, icon) {
+    
+    let iconURL = "https://openweathermap.org/img/w/" + icon + ".png";
+    
+    let currentWeatherIcon = `
+    <img src="${iconURL}">`
+
+    $('#currentWeather').html(currentWeatherIcon)
+
+    citySearchName.textContent = name 
+    
+   
     // console.log(name);
 var temperature = document.createElement("li");
 temperature.textContent = "Temp: " + temp + " F";
