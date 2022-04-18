@@ -20,7 +20,7 @@ var cityNames = []
 
 var getCurrentWeatherData = function(name) {
     //format the github apiUrl to grab weather for a specific city
-    var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + name + "&appid=642eea345e5cbf72aef7bc5c87e8b7e2&units=imperial" 
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + name + "&appid=642eea345e5cbf72aef7bc5c87e8b7e2&units=imperial" 
 
     //make a request to the url
     fetch(apiUrl)
@@ -36,7 +36,7 @@ var getCurrentWeatherData = function(name) {
 
 
     //fetch call for 5 day forecast wouldn't accept appid, so I used the daily 3 hour forecast instead.
-    var fiveDayFetchCall = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=642eea345e5cbf72aef7bc5c87e8b7e2&units=imperial"
+    var fiveDayFetchCall = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=642eea345e5cbf72aef7bc5c87e8b7e2&units=imperial"
     
     //make a request to the url
     fetch(fiveDayFetchCall)
