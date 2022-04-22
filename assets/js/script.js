@@ -15,6 +15,8 @@ var listDay5 = document.getElementById("dayFiveContent");
 var cityIdCounter = 0;
 var submitButton = document.querySelector(".btn")
 var recentSearch = document.querySelector("#city-results")
+var fiveDaySection = document.getElementById("fiveDaySection");
+var currentWeather = document.getElementById("currentWeatherBox");
 
 var cityNames = []
 
@@ -32,6 +34,7 @@ var getCurrentWeatherData = function(name) {
     const  {icon} = data.weather[0]
     const {temp, humidity} = data.main
     listGroupEl.innerHTML = ''
+    currentWeather.classList.remove("hide")
     DisplayCity(name, temp, speed, humidity, icon)
 
 
@@ -44,38 +47,39 @@ var getCurrentWeatherData = function(name) {
     response.json().then(function(data){
     console.log(data)
     //data day 1
-    const dateOne = data.list[1].dt_txt
-    const tempOne = data.list[1].main.temp
-    const windOne = data.list[1].wind.speed
-    const humidityOne = data.list[1].main.humidity
+    const dateOne = data.list[9].dt
+    const tempOne = data.list[9].main.temp
+    const windOne = data.list[9].wind.speed
+    const humidityOne = data.list[9].main.humidity
     listDay1.innerHTML = ''
+    fiveDaySection.classList.remove("hide")
     dayOneForecast(dateOne, tempOne, windOne, humidityOne)
     //data day 2
-    const dateTwo = data.list[9].dt_txt
-    const tempTwo = data.list[9].main.temp
-    const windTwo = data.list[9].wind.speed
-    const humidityTwo = data.list[9].main.humidity
+    const dateTwo = data.list[17].dt
+    const tempTwo = data.list[17].main.temp
+    const windTwo = data.list[17].wind.speed
+    const humidityTwo = data.list[17].main.humidity
     listDay2.innerHTML = ''
     dayTwoForecast(dateTwo, tempTwo, windTwo, humidityTwo)
     //data day 3
-    const dateThree = data.list[17].dt_txt
-    const tempThree = data.list[17].main.temp
-    const windThree = data.list[17].wind.speed
-    const humidityThree = data.list[17].main.humidity
+    const dateThree = data.list[25].dt
+    const tempThree = data.list[25].main.temp
+    const windThree = data.list[25].wind.speed
+    const humidityThree = data.list[25].main.humidity
     listDay3.innerHTML = ''
     dayThreeForecast(dateThree, tempThree, windThree, humidityThree)
     //data day 4
-    const dateFour = data.list[25].dt_txt
-    const tempFour = data.list[25].main.temp
-    const windFour = data.list[25].wind.speed
-    const humidityFour = data.list[25].main.humidity
+    const dateFour = data.list[33].dt
+    const tempFour = data.list[33].main.temp
+    const windFour = data.list[33].wind.speed
+    const humidityFour = data.list[33].main.humidity
     listDay4.innerHTML = ''
     dayFourForecast(dateFour, tempFour, windFour, humidityFour)
     //data day 5
-    const dateFive = data.list[33].dt_txt
-    const tempFive = data.list[33].main.temp
-    const windFive = data.list[33].wind.speed
-    const humidityFive = data.list[33].main.humidity
+    const dateFive = data.list[39].dt
+    const tempFive = data.list[39].main.temp
+    const windFive = data.list[39].wind.speed
+    const humidityFive = data.list[39].main.humidity
     listDay5.innerHTML = ''
     dayFiveForecast(dateFive, tempFive, windFive, humidityFive)
         })
@@ -133,6 +137,7 @@ function addToList(cityName) {
     buttonEl.textContent = cityName;
     buttonEl.addEventListener('click', function() {
         var name = this.textContent
+        console.log(name)
         getCurrentWeatherData(name)
     })
     recentSearch.appendChild(buttonEl);
@@ -179,7 +184,8 @@ listGroupEl.appendChild(UV);
 
 
 var dayOneForecast = function(dateOne, tempOne, windOne, humidityOne) {
-    dateDayOne.textContent = dateOne
+    console.log(dateOne)
+    dateDayOne.textContent = moment.unix(dateOne).format("MM/DD/YYYY");
 var temperature = document.createElement('li');
 temperature.textContent = "Temp: " + tempOne + " F";
 listDay1.appendChild(temperature);
@@ -192,7 +198,7 @@ listDay1.appendChild(humidity);
 }
 
 var dayTwoForecast = function(dateTwo, tempTwo, windTwo, humidityTwo) {
-    dateDayTwo.textContent = dateTwo
+    dateDayTwo.textContent = moment.unix(dateTwo).format("MM/DD/YYYY");
 var temperature = document.createElement('li');
 temperature.textContent = "Temp: " + tempTwo + " F";
 listDay2.appendChild(temperature);
@@ -205,7 +211,7 @@ listDay2.appendChild(humidity);
 }
 
 var dayThreeForecast = function(dateThree, tempThree, windThree, humidityThree) {
-    dateDayThree.textContent = dateThree
+    dateDayThree.textContent = moment.unix(dateThree).format("MM/DD/YYYY");
 var temperature = document.createElement('li');
 temperature.textContent = "Temp: " + tempThree + " F";
 listDay3.appendChild(temperature);
@@ -218,7 +224,7 @@ listDay3.appendChild(humidity);
 }
 
 var dayFourForecast = function(dateFour, tempFour, windFour, humidityFour) {
-    dateDayFour.textContent = dateFour
+    dateDayFour.textContent = moment.unix(dateFour).format("MM/DD/YYYY");
 var temperature = document.createElement('li');
 temperature.textContent = "Temp: " + tempFour + " F";
 listDay4.appendChild(temperature);
@@ -231,7 +237,7 @@ listDay4.appendChild(humidity);
 }
 
 var dayFiveForecast = function(dateFive, tempFive, windFive, humidityFive) {
-    dateDayFive.textContent = dateFive
+    dateDayFive.textContent = moment.unix(dateFive).format("MM/DD/YYYY");
 var temperature = document.createElement('li');
 temperature.textContent = "Temp: " + tempFive + " F";
 listDay5.appendChild(temperature);

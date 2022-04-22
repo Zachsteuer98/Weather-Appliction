@@ -94,3 +94,17 @@
   border-radius: 5px;
   color: white;
 }
+
+.hide {
+  display: none;
+}
+
+@media screen and (max-width: 1060px) {
+  #centerWeather {
+    flex-direction: column !important;
+    align-items: center;
+  }
+  .column {
+    flex-direction: column;
+  }
+}

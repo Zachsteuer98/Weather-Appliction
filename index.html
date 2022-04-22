@@ -1,89 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-        rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
-    <link
-        rel="stylesheet"
-        href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-        crossorigin="anonymous"
-    />
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
-        rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./assets/css/style.css"
-    />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>National and Local Weather</title>
 </head>
-<body>
-<header class="hero">
-    <h1 class="app-title">Weather Dashboard</h1> 
-</header>
 
-<main class="flex-row justify-space-between">
-    <div class="col-12 col-md-4">
-        <div class="card">
-        <h3 class="card-header text-uppercase">Search for a City:</h3>
-        <form id="user-form" class="card-body">
-            <input name="citySearch" id="citySearch" type="text" autofocus="true" class="form-input" />
-            <button type="submit" class="btn">Search</button>
-        </form>
+<body>
+    <header class="hero">
+        <h1 class="app-title">Weather Dashboard</h1>
+    </header>
+
+    <main class="flex-row justify-space-between" id="centerWeather">
+        <div class="col-12 col-md-4">
+            <div class="card">
+                <h3 class="card-header text-uppercase">Search for a City:</h3>
+                <form id="user-form" class="card-body">
+                    <input name="citySearch" id="citySearch" type="text" autofocus="true" class="form-input" />
+                    <button type="submit" class="btn">Search</button>
+                </form>
+            </div>
+
+            <!-- list of prior searched cities -->
+            <ul id="city-results" class="list-group mt-4"></ul>
+            <!-- clear storage button -->
+
         </div>
 
-        <!-- list of prior searched cities -->
-        <ul id="city-results" class="list-group mt-4"></ul>
-        <!-- clear storage button -->
-         
-    </div>
-
-    <div class= "col-12 col-md-8">
-        <h2 id = "current-weather-for"> Current Weather for: <span id="city-search-name"></span><span id="currentWeather"></span></h2>
-        <div id="repos-container" class="list-group">
-            <div>
-                <ul id= "currentDayContent"></ul>
+        <div class="col-12 col-md-8 hide" id="currentWeatherBox">
+            <h2 id="current-weather-for"> Current Weather for: <span id="city-search-name"></span><span
+                    id="currentWeather"></span></h2>
+            <div id="repos-container" class="list-group">
+                <div>
+                    <ul id="currentDayContent"></ul>
+                </div>
             </div>
         </div>
-    </div>
-</main>
+    </main>
 
-<main class="container">
-    <div class="row align-items-center">
-        <div class = "col card">
-            <h5 class="card-header"> date: <span id="date1"></span> </h5>
-            <ul id="dayOneContent"></ul>
+    <main class="container hide" id="fiveDaySection">
+        <div class="row align-items-center column">
+            <div class="col card">
+                <h5 class="card-header"> date: <span id="date1"></span> </h5>
+                <ul id="dayOneContent"></ul>
+            </div>
+            <div class="col card">
+                <h5 class="card-header"> date: <span id="date2"></span></h5>
+                <ul id="dayTwoContent"></ul>
+            </div>
+            <div class="col card">
+                <h5 class="card-header"> date: <span id="date3"></span></h5>
+                <ul id="dayThreeContent"></ul>
+            </div>
         </div>
-        <div class = "col card">
-            <h5 class= "card-header"> date: <span id="date2"></span></h5>
-            <ul id="dayTwoContent"></ul>
+        <div class="row justify-content-around column">
+            <div class="col card">
+                <h5 class="card-header"> date: <span id="date4"></span></h5>
+                <ul id="dayFourContent"></ul>
+            </div>
+            <div class="col card">
+                <h5 class="card-header"> date: <span id="date5"></span></h5>
+                <ul id="dayFiveContent"></ul>
+            </div>
         </div>
-        <div class = "col card">
-            <h5 class="card-header"> date: <span id="date3"></span></h5>
-            <ul id="dayThreeContent"></ul>
-        </div>
-    </div>
-    <div class = "row justify-content-around">
-        <div class="col-4 card">
-            <h5 class="card-header"> date: <span id="date4"></span></h5>
-            <ul id="dayFourContent"></ul>            
-        </div>
-        <div class="col-4 card">
-            <h5 class="card-header"> date: <span id="date5"></span></h5>
-            <ul id="dayFiveContent"></ul>
-        </div>
-    </div>
-</main>
+    </main>
 
-<br><br><br><br>
-    
+    <br><br><br><br>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src= "assets/js/script.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
+
 </html>
