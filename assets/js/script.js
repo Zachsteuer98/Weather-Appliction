@@ -51,37 +51,43 @@ var getCurrentWeatherData = function(name) {
     const tempOne = data.list[9].main.temp
     const windOne = data.list[9].wind.speed
     const humidityOne = data.list[9].main.humidity
+    const icon1 = data.list[9].weather[0].icon
+    console.log("icon", icon)
     listDay1.innerHTML = ''
     fiveDaySection.classList.remove("hide")
-    dayOneForecast(dateOne, tempOne, windOne, humidityOne)
+    dayOneForecast(dateOne, tempOne, windOne, humidityOne, icon1)
     //data day 2
     const dateTwo = data.list[17].dt
     const tempTwo = data.list[17].main.temp
     const windTwo = data.list[17].wind.speed
     const humidityTwo = data.list[17].main.humidity
+    const icon2 = data.list[17].weather[0].icon
     listDay2.innerHTML = ''
-    dayTwoForecast(dateTwo, tempTwo, windTwo, humidityTwo)
+    dayTwoForecast(dateTwo, tempTwo, windTwo, humidityTwo, icon2)
     //data day 3
     const dateThree = data.list[25].dt
     const tempThree = data.list[25].main.temp
     const windThree = data.list[25].wind.speed
     const humidityThree = data.list[25].main.humidity
+    const icon3 = data.list[25].weather[0].icon
     listDay3.innerHTML = ''
-    dayThreeForecast(dateThree, tempThree, windThree, humidityThree)
+    dayThreeForecast(dateThree, tempThree, windThree, humidityThree, icon3)
     //data day 4
     const dateFour = data.list[33].dt
     const tempFour = data.list[33].main.temp
     const windFour = data.list[33].wind.speed
     const humidityFour = data.list[33].main.humidity
+    const icon4 = data.list[33].weather[0].icon
     listDay4.innerHTML = ''
-    dayFourForecast(dateFour, tempFour, windFour, humidityFour)
+    dayFourForecast(dateFour, tempFour, windFour, humidityFour, icon4)
     //data day 5
     const dateFive = data.list[39].dt
     const tempFive = data.list[39].main.temp
     const windFive = data.list[39].wind.speed
     const humidityFive = data.list[39].main.humidity
+    const icon5 = data.list[39].weather[0].icon
     listDay5.innerHTML = ''
-    dayFiveForecast(dateFive, tempFive, windFive, humidityFive)
+    dayFiveForecast(dateFive, tempFive, windFive, humidityFive, icon5)
         })
     })
 
@@ -183,7 +189,7 @@ listGroupEl.appendChild(UV);
 };
 
 
-var dayOneForecast = function(dateOne, tempOne, windOne, humidityOne) {
+var dayOneForecast = function(dateOne, tempOne, windOne, humidityOne, icon1) {
     console.log(dateOne)
     dateDayOne.textContent = moment.unix(dateOne).format("MM/DD/YYYY");
 var temperature = document.createElement('li');
@@ -195,9 +201,15 @@ listDay1.appendChild(wind);
 var humidity = document.createElement('li');
 humidity.textContent = "Humidity: " + humidityOne + " %";
 listDay1.appendChild(humidity);
+
+let iconURL = "https://openweathermap.org/img/w/" + icon1 + ".png";
+let currentWeatherIcon = `
+    <img src="${iconURL}">`
+
+    $('#iconOne').html(currentWeatherIcon)
 }
 
-var dayTwoForecast = function(dateTwo, tempTwo, windTwo, humidityTwo) {
+var dayTwoForecast = function(dateTwo, tempTwo, windTwo, humidityTwo, icon2) {
     dateDayTwo.textContent = moment.unix(dateTwo).format("MM/DD/YYYY");
 var temperature = document.createElement('li');
 temperature.textContent = "Temp: " + tempTwo + " F";
@@ -208,9 +220,15 @@ listDay2.appendChild(wind);
 var humidity = document.createElement('li');
 humidity.textContent = "Humidity: " + humidityTwo + " %";
 listDay2.appendChild(humidity);
+
+let iconURL = "https://openweathermap.org/img/w/" + icon2 + ".png";
+let currentWeatherIcon2 = `
+    <img src="${iconURL}">`
+
+    $('#iconTwo').html(currentWeatherIcon2)
 }
 
-var dayThreeForecast = function(dateThree, tempThree, windThree, humidityThree) {
+var dayThreeForecast = function(dateThree, tempThree, windThree, humidityThree, icon3) {
     dateDayThree.textContent = moment.unix(dateThree).format("MM/DD/YYYY");
 var temperature = document.createElement('li');
 temperature.textContent = "Temp: " + tempThree + " F";
@@ -221,9 +239,15 @@ listDay3.appendChild(wind);
 var humidity = document.createElement('li');
 humidity.textContent = "Humidity: " + humidityThree + " %";
 listDay3.appendChild(humidity);
+
+let iconURL = "https://openweathermap.org/img/w/" + icon3 + ".png";
+let currentWeatherIcon3 = `
+    <img src="${iconURL}">`
+
+    $('#iconThree').html(currentWeatherIcon3)
 }
 
-var dayFourForecast = function(dateFour, tempFour, windFour, humidityFour) {
+var dayFourForecast = function(dateFour, tempFour, windFour, humidityFour, icon4) {
     dateDayFour.textContent = moment.unix(dateFour).format("MM/DD/YYYY");
 var temperature = document.createElement('li');
 temperature.textContent = "Temp: " + tempFour + " F";
@@ -234,9 +258,15 @@ listDay4.appendChild(wind);
 var humidity = document.createElement('li');
 humidity.textContent = "Humidity: " + humidityFour + " %";
 listDay4.appendChild(humidity);
+
+let iconURL = "https://openweathermap.org/img/w/" + icon4 + ".png";
+let currentWeatherIcon4 = `
+    <img src="${iconURL}">`
+
+    $('#iconFour').html(currentWeatherIcon4)
 }
 
-var dayFiveForecast = function(dateFive, tempFive, windFive, humidityFive) {
+var dayFiveForecast = function(dateFive, tempFive, windFive, humidityFive, icon5) {
     dateDayFive.textContent = moment.unix(dateFive).format("MM/DD/YYYY");
 var temperature = document.createElement('li');
 temperature.textContent = "Temp: " + tempFive + " F";
@@ -247,6 +277,12 @@ listDay5.appendChild(wind);
 var humidity = document.createElement('li');
 humidity.textContent = "Humidity: " + humidityFive + " %";
 listDay5.appendChild(humidity);
+
+let iconURL = "https://openweathermap.org/img/w/" + icon5 + ".png";
+let currentWeatherIcon5 = `
+    <img src="${iconURL}">`
+
+    $('#iconFive').html(currentWeatherIcon5)
 }
 
 userFormEl.addEventListener("submit", formSubmitHandler);

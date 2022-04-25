@@ -108,3 +108,11 @@
     flex-direction: column;
   }
 }
+
+.spacing {
+  margin-right: 10px;
+}
+
+.center {
+  align-items: center;
+}
